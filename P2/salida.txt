@@ -1,0 +1,6 @@
+Id socio= 5, nombre= Raul, numero de motos= 1, importe total de motos en posesion= 2500
+Cesion: Moto cedida= Matricula= 1111AAA, marca= Vespa, modelo= Primavera, cc= 125, coste_compra= 2500
+, Socio que cede: Id socio= 1, nombre= Ramon, numero de motos= 3, importe total de motos en posesion= 2500
+ Socio al que se cede Id socio= 5, nombre= Raul, numero de motos= 1, importe total de motos en posesion= 2500
+
+ Fecha de la cesion=Wed Oct 16 11:50:08 CEST 2019
