@@ -226,7 +226,6 @@ public class Gestor {
         
         for (Moto moto : motos) {
             if(moto.getMatricula().equals((matricula))){
-                System.out.println("");
                 motoact = moto;
                 comprobacion = false;
             }
