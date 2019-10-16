@@ -29,7 +29,7 @@ public class LauncherP1 {
         String nombre="",matricula="",marca="",modelo="";
         
         //Variables Integer utilizadas en el uso de la aplicacion
-        int opcion,cc=0,coste_compra=0,id1,id2;
+        int opcion,cc=0,coste_compra=0,id1,id2, importe_max;
         
         //Objetos socio usados en la aplicacion
         Socio soc1, soc2;
@@ -47,6 +47,8 @@ public class LauncherP1 {
              * un proceso
              */
             Scanner s = new Scanner(System.in);
+            System.out.println("Introduzca el importe máximo de motos por socio: \n");
+            importe_max = s.nextInt();
             System.out.println("BIENVENIDO A: \n Elija entre las siguientes opciones: \n");
             System.out.println("1) Registrar socio \n 2) Registrar moto \n "
                     + "3) Registrar cesion \n 4) Mostrar lista de Socios \n 5) Mostrar lista de Motos\n "

@@ -18,7 +18,7 @@ public class Gestor {
     /**
      * Importe de motos limite permitido de un socio 
      */
-    final private int IMPORTE_LIMITE_MOTOS_SOCIO = 6000;
+    private int importe_max_socio = 6000;
     
     /**
      * Lista de motos registradas en la aplicacion
@@ -155,7 +155,7 @@ public class Gestor {
      * @return constante de importe de motos limite de un socio
      */
     public int getIMPORTE_LIMITE_MOTOS_SOCIO() {
-        return IMPORTE_LIMITE_MOTOS_SOCIO;
+        return importe_max_socio;
     }
     
     
@@ -232,10 +232,16 @@ public class Gestor {
     private boolean comprobarImporteMotosSocio(Socio soc, Moto moto){
         boolean comprobacion = true;
         
-        if((soc.getImporte_total_motos()+moto.getCoste_compra()) > IMPORTE_LIMITE_MOTOS_SOCIO){
+        if((soc.getImporte_total_motos()+moto.getCoste_compra()) > importe_max_socio){
             comprobacion = false;
         }
         return comprobacion;
+    }
+    
+    public void setImporteMax(int importe_max){
+        
+       importe_max_socio = importe_max;
+        
     }
     
     /**
