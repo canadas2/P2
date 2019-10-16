@@ -29,7 +29,7 @@ public class LauncherP1 {
         String nombre="",matricula="",marca="",modelo="";
         
         //Variables Integer utilizadas en el uso de la aplicacion
-        int opcion,cc=0,coste_compra=0,id1,id2, importe_max;
+        int opcion,cc=0,coste_compra=0, otros_gastos=0,id1,id2, importe_max;
         
         //Objetos socio usados en la aplicacion
         Socio soc1, soc2;
@@ -39,6 +39,10 @@ public class LauncherP1 {
         
         //Gestor declarado
         acma = new Gestor();
+        Scanner s = new Scanner(System.in);
+        System.out.println("Introduzca el importe máximo de motos por socio: \n");
+        importe_max = s.nextInt();
+        acma.setImporteMax(importe_max);
         
         do{
             /**
@@ -46,13 +50,11 @@ public class LauncherP1 {
              * El usuario selecciona una de las opciones para iniciar
              * un proceso
              */
-            Scanner s = new Scanner(System.in);
-            System.out.println("Introduzca el importe máximo de motos por socio: \n");
-            importe_max = s.nextInt();
-            System.out.println("BIENVENIDO A: \n Elija entre las siguientes opciones: \n");
+            System.out.println("BIENVENIDO/A: \n Elija entre las siguientes opciones: \n");
             System.out.println("1) Registrar socio \n 2) Registrar moto \n "
                     + "3) Registrar cesion \n 4) Mostrar lista de Socios \n 5) Mostrar lista de Motos\n "
-                    + "6) Mostrar lista de Cesiones\n 7) Cerrar aplicacion y guardar dato en fichero\n");
+                    + "6) Mostrar lista de Cesiones\n 7) Cerrar aplicacion y guardar dato en fichero\n"
+                    + "8) Incrementar otros gastos de una moto\n");
             opcion = s.nextInt();
             
             //Switch para ver que opcion se ha elegido y realizar esa operacion
@@ -84,7 +86,9 @@ public class LauncherP1 {
                     coste_compra = s2.nextInt();
                     System.out.println("Introduzca id del socio al que se le asignara la id:");
                     id1 = s2.nextInt();
-                    acma.altaMoto(matricula, marca, modelo, cc, coste_compra, id1);
+                    System.out.println("Introduzca importe de otros gastos de la moto:");
+                    otros_gastos = s2.nextInt();
+                    acma.altaMoto(matricula, marca, modelo, cc, coste_compra, otros_gastos, id1);
                     System.out.println("se supone que se ha dado d alta la moto");
                     break;
                     
@@ -120,7 +124,16 @@ public class LauncherP1 {
                 case 7:
                     acma.guardarInfo();
                     break;
-                    
+                //Incrementar otros gastos de motos
+                case 8:
+                    System.out.println("Ha elegido INCREMENTAR OTROS GASTOS de una moto");
+                    Scanner s4 = new Scanner(System.in);
+                    System.out.println("Introduzca la matricula de la moto a incrementar sus otros gastos");
+                    matricula = s4.nextLine();
+                    System.out.println("Introduzca importe de otros gastos a incrementar");
+                    otros_gastos = s4.nextInt();
+                    acma.incrementarOtrosGastosMoto(matricula, otros_gastos);
+                    break;
                 //Opcion por defecto que muestra un mensaje de error
                 default:
                     System.out.println("No se ha elegido una opcion correcta");

@@ -46,6 +46,11 @@ public class Moto {
     private int id_socio_asociado;
     
     /**
+     * Otros gastos que se iran incrementando de una moto
+     */
+    private int otros_gastos;
+    
+    /**
      * Constructor vacio de Moto
      */
     public Moto(){
@@ -59,14 +64,16 @@ public class Moto {
      * @param modelo Modelo de la moto
      * @param cc Cilindrada de la moto
      * @param coste_compra Coste de compra de la moto
+     * @param otros_gastos
      */
-    public Moto(String matricula, String marca, String modelo, int cc, int coste_compra) {
+    public Moto(String matricula, String marca, String modelo, int cc, int coste_compra, int otros_gastos) {
         this.matricula = matricula;
         //this.matricula = String.format("%04d", this.matricula_num)+this.matricula_letras;
         this.marca = marca;
         this.modelo = modelo;
         this.cc = cc;
         this.coste_compra = coste_compra;
+        this.otros_gastos = otros_gastos;
     }   
 
     /**
@@ -102,12 +109,21 @@ public class Moto {
     }
     
     /**
+     * Metodo para incrementar otros gastos de una moto
+     * @param incremento valor que se suma a otros gastos
+     */
+    public void incrementarOtrosGastos(int incremento){
+        this.otros_gastos+=incremento;
+    }
+    
+    /**
      * Metodo sobreescrito toString
      * @return datos de una moto
      */
     @Override
     public String toString() {
-        return "Matricula= " + matricula + ", marca= " + marca + ", modelo= " + modelo + ", cc= " + cc + ", coste_compra= " + coste_compra+"\n";
+        return "Matricula= " + matricula + ", marca= " + marca + ", modelo= " + modelo + ", cc= " + cc + ", coste_compra= " + coste_compra+
+                ", otros gastos= "+otros_gastos+"\n";
     }
     
     

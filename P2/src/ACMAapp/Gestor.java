@@ -55,12 +55,12 @@ public class Gestor {
         cesiones= new ArrayList();
         
         //Motos ya registradas en la aplicacion previamente
-        motos.add(new Moto("1111AAA","Vespa", "Primavera", 125, 2500));
-        motos.add(new Moto("2222BBB","Vespa", "Primavera", 125, 2500));
-        motos.add(new Moto("3333CCC","Motobeane", "Poney AG2", 70, 2300));
-        motos.add(new Moto("4444DDD","Bultaco", "", 200, 3800));
-        motos.add(new Moto("5555EEE","Guzzi", "Cardelino 73", 75, 1200));
-        motos.add(new Moto("6666FFFF","Ducati", "Mini", 49, 4000));
+        motos.add(new Moto("1111AAA","Vespa", "Primavera", 125, 2500, 100));
+        motos.add(new Moto("2222BBB","Vespa", "Primavera", 125, 2500,100));
+        motos.add(new Moto("3333CCC","Motobeane", "Poney AG2", 70, 2300,150));
+        motos.add(new Moto("4444DDD","Bultaco", "", 200, 3800,200));
+        motos.add(new Moto("5555EEE","Guzzi", "Cardelino 73", 75, 1200,50));
+        motos.add(new Moto("6666FFFF","Ducati", "Mini", 49, 4000,180));
         
         //Creamos un socio
         socios.add(new Socio("Ramon"));
@@ -109,13 +109,13 @@ public class Gestor {
      * @param coste_compra coste de compra de la moto
      * @param idsoc id del socio a anyadir la moto
      */
-    public void altaMoto(String matricula, String marca, String modelo, int cc, int coste_compra, int idsoc){
+    public void altaMoto(String matricula, String marca, String modelo, int cc, int coste_compra, int otros_gastos, int idsoc){
         
         Socio soc;
         
         if(comprobarMatriculaIgual(matricula)){
             System.out.println("Matricula es correcta, no hay otra igual.");
-            this.motos.add(new Moto(matricula, marca, modelo, cc, coste_compra));
+            this.motos.add(new Moto(matricula, marca, modelo, cc, coste_compra, otros_gastos));
             
             soc = this.comprobarIdSocio(idsoc);
         
@@ -202,6 +202,18 @@ public class Gestor {
             System.out.println(c.toString());
         }
     }
+    /**
+     * Metodo pra incrementar los otros gastos de una moto
+     * @param matricula matricula de la moto que se quiere incrementar los otros gastos
+     * @param otros_gastos valor a incrementar en otros gastos de la moto
+     */
+    public void incrementarOtrosGastosMoto(String matricula, int otros_gastos){
+        if(!this.comprobarMatriculaIgual(matricula)){
+            motoact.incrementarOtrosGastos(otros_gastos);
+        }else{
+            System.out.println("ERROR: mstricula no encontrada");
+        }
+    }
     
     /**
      * Metodo para comprobar que la matricula existe y tener una 
@@ -238,17 +250,19 @@ public class Gestor {
         return comprobacion;
     }
     
+    /**
+     * Metodo Set de importe_max_socio
+     * @param importe_max importe maximo de motos permitido por socio
+     */
     public void setImporteMax(int importe_max){
-        
        importe_max_socio = importe_max;
-        
     }
     
     /**
      * Metodo para comprobar que el socio esta dado de alta en la asociacion
      * segun su id
      * @param id id del socio buscado
-     * @return 
+     * @return socio si se encuentra y null en caso contrario
      */
     private Socio comprobarIdSocio(int id){
         
