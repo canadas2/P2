@@ -29,7 +29,7 @@ public class LauncherP1 {
         String nombre="",matricula="",marca="",modelo="";
         
         //Variables Integer utilizadas en el uso de la aplicacion
-        int opcion,cc=0,coste_compra=0, otros_gastos=0,id1,id2, importe_max;
+        int opcion,cc=0,coste_compra=0, otros_gastos=0,id1,id2, importe_max,id_cliente_baja=0;
         
         //Objetos socio usados en la aplicacion
         Socio soc1, soc2;
@@ -51,10 +51,10 @@ public class LauncherP1 {
              * un proceso
              */
             System.out.println("BIENVENIDO/A: \n Elija entre las siguientes opciones: \n");
-            System.out.println("1) Registrar socio \n 2) Registrar moto \n "
+            System.out.println(" 1) Registrar socio \n 2) Registrar moto \n "
                     + "3) Registrar cesion \n 4) Mostrar lista de Socios \n 5) Mostrar lista de Motos\n "
                     + "6) Mostrar lista de Cesiones\n 7) Cerrar aplicacion y guardar dato en fichero\n"
-                    + "8) Incrementar otros gastos de una moto\n 9) Eliminar socio de la asociacion");
+                    + " 8) Incrementar otros gastos de una moto\n 9) Eliminar socio de la asociacion");
             opcion = s.nextInt();
             
             //Switch para ver que opcion se ha elegido y realizar esa operacion
@@ -65,9 +65,8 @@ public class LauncherP1 {
                     Scanner s1 = new Scanner(System.in);
                     System.out.println("Introduzca el NOMBRE del nuevo miembro:");
                     nombre = s1.nextLine();
-                    System.out.println("coge bien scanner" + nombre);
                     acma.altaSocio(nombre);
-                    System.out.println("se supone que se ha creao el socio");
+                    System.out.println("Se ha creado el socio correctamente.");
                     break;
                     
                 //Registrar moto
@@ -89,7 +88,7 @@ public class LauncherP1 {
                     System.out.println("Introduzca importe de otros gastos de la moto:");
                     otros_gastos = s2.nextInt();
                     acma.altaMoto(matricula, marca, modelo, cc, coste_compra, otros_gastos, id1);
-                    System.out.println("se supone que se ha dado d alta la moto");
+                    System.out.println("Se ha dado de alta la moto.");
                     break;
                     
                 //Registrar una cesion
@@ -136,6 +135,12 @@ public class LauncherP1 {
                     break;
                 //Eliminar un socio de la asociacion
                 case 9:
+                    System.out.println("Ha elegido ELEMINAR MIEMBRO.");
+                    Scanner s5 = new Scanner(System.in);
+                    System.out.println("Introduzca la ID del socio que desea dar de baja: ");
+                    id_cliente_baja = s5.nextInt();
+                    acma.eliminarSocio(id_cliente_baja);
+                    System.out.println("Se elimino el socio correctamente. ");
                     break;
                 //Opcion por defecto que muestra un mensaje de error
                 default:

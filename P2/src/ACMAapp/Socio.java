@@ -5,7 +5,9 @@
  */
 package ACMAapp;
 
+import static ACMAapp.LauncherP1.acma;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * @author Paula Catala
@@ -17,6 +19,8 @@ public class Socio {
      * Variable statica para marcar el siguiente id a asignar en cada socio
      */
     static private int id_proximo = 1;
+    
+    static Gestor acma;
     
     /**
      * ID del socio
@@ -90,6 +94,12 @@ public class Socio {
     public int getId() {
         return id_socio;
     }
+
+    public ArrayList<Moto> getMotos() {
+        return motos;
+    }
+    
+    
     
     /**
      * Metodo para anyadir una moto a la lista de motos del socio, 
@@ -110,9 +120,14 @@ public class Socio {
      */
     public void eliminarMoto(Moto moto){
         this.quitaValorImporteTotalMotos(moto.getCoste_compra());
-        this.numero_motos++;
+        this.numero_motos--;
         this.motos.remove(moto);
     }
+    
+    /**
+     * Metodo para ceder todas sus motos a otros socios para
+     * darse de baja.
+     */
     
     /**
      * Metodo para recoger una moto de la lista de motos del socio

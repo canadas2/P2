@@ -8,6 +8,8 @@ package ACMAapp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.io.*;
+import java.util.Iterator;
+import java.util.Scanner;
 
 /**
  * @author Paula Catala
@@ -19,6 +21,10 @@ public class Gestor {
      * Importe de motos limite permitido de un socio 
      */
     private int importe_max_socio = 6000;
+    /**
+     * ID del socio al que se desea ceder la moto del cliente que se da de baja
+     */
+    private int id_socioAceder;
     
     /**
      * Lista de motos registradas en la aplicacion
@@ -34,6 +40,10 @@ public class Gestor {
      * Lista de cesiones registradas en la aplicacion
      */
     private ArrayList<Cesion> cesiones;
+    /**
+     * Lista de motos donde guardamos las motos a ceder del socio que se desea dar de baja
+     */
+    private ArrayList<Moto> motos_socioAEliminar;
     
     /**
      * Fecha actual 
@@ -148,6 +158,7 @@ public class Gestor {
             soc2.anyadirMoto(moto);
         }
         cesiones.add(new Cesion(moto, soc1, soc2, fecha_act));
+        System.out.println("Cesion añadida correctamente.");
     }
     
     
@@ -214,9 +225,30 @@ public class Gestor {
      */
     public void eliminarSocio(int id_socio){
         Socio socio = this.comprobarIdSocio(id_socio);
-        
+        Scanner s6 = new Scanner(System.in);
+        motos_socioAEliminar= new ArrayList();
+        ArrayList<Moto> motos_ceder = new ArrayList();
         if(socio != null){
+               for(Iterator<Socio> it = socios.iterator();it.hasNext();){
+                   Socio s = it.next();
+                   if(s.getId()==id_socio){
+                       motos_socioAEliminar = s.getMotos();
+                       for(Moto moto: motos_socioAEliminar){    //guardamos todas las motos del socio a eliminar en otro array que recorreremos luego para ceder cada una de ellas 
+                           motos_ceder.add(moto);
+                       }
+                       for(Moto m: motos_ceder){
+                           String string = m.toString();
+                           System.out.println("Info. de la moto a ceder:" + string);
+                           
+                           System.out.println("Introduzca la ID del socio al que desea ceder la moto: ");
+                           id_socioAceder = s6.nextInt();
+                           cesion(m.getMatricula(),id_socio,id_socioAceder);
+                           
+                       }
 
+                       it.remove(); //eliminamos el socio
+                   }
+               }
         }else{
             System.out.println("ERROR: El socio con id= "+id_socio+" no existe en la aplicacion");
         }
