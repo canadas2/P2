@@ -20,7 +20,10 @@ public class Socio {
      */
     static private int id_proximo = 1;
     
-    static Gestor acma;
+    /**
+     * Numero de cesiones de motos recibidas
+     */
+    private int num_cesiones;
     
     /**
      * ID del socio
@@ -98,6 +101,19 @@ public class Socio {
     public ArrayList<Moto> getMotos() {
         return motos;
     }
+
+    public int getNum_cesiones() {
+        return num_cesiones;
+    }
+
+    public void setNum_cesiones(int num_cesiones) {
+        this.num_cesiones = num_cesiones;
+    }
+    
+    public void aumentarNum_cesiones(){
+        num_cesiones++;
+    }
+    
     
     
     
@@ -175,7 +191,7 @@ public class Socio {
      */
     @Override
     public String toString() {
-        return "Id socio= " + id_socio + ", nombre= " + nombre + ", numero de motos= " + numero_motos + ", importe total de motos en posesion= " + importe_total_motos + "\n";
+        return "Id socio= " + id_socio + ", nombre= " + nombre + ", numero de motos= " + numero_motos + ", importe total de motos en posesion= " + importe_total_motos +", numero cesiones= "+ num_cesiones +"\n";
     }
     
     

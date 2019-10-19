@@ -44,12 +44,27 @@ public class Cesion {
         this.fecha = fecha;
     }
 
+    public Socio getSoc2() {
+        return soc2;
+    }
+
+    public void setSoc2(Socio soc2) {
+        this.soc2 = soc2;
+    }
+
+    public Moto getMoto() {
+        return moto;
+    }
+    
+    
+    
+
     /**
      * Metodo sobreescrito toString
      * @return datos de una cesion
      */
     @Override
     public String toString() {
-        return "Cesion: " + "Moto cedida= " + moto + ", Socio que cede: " + soc1.toString() + " Socio al que se cede " + soc2.toString() + "\n Fecha de la cesion=" + fecha.toString() + "\n";
+        return "Moto cedida: " + moto + ", Socio que cede: " + soc1.toString() + " Socio al que se cede " + soc2.toString() + "\n Fecha de la cesion=" + fecha.toString() + "\n";
     } 
 }

@@ -40,7 +40,7 @@ public class LauncherP1 {
         //Gestor declarado
         acma = new Gestor();
         Scanner s = new Scanner(System.in);
-        System.out.println("Introduzca el importe máximo de motos por socio: \n");
+        System.out.println("BIENVENIDO/A A ACAMA.\nIntroduzca el importe máximo de motos por socio: \n");
         importe_max = s.nextInt();
         acma.setImporteMax(importe_max);
         
@@ -50,11 +50,12 @@ public class LauncherP1 {
              * El usuario selecciona una de las opciones para iniciar
              * un proceso
              */
-            System.out.println("BIENVENIDO/A: \n Elija entre las siguientes opciones: \n");
+            System.out.println("MENU: \n Elija entre las siguientes opciones: \n");
             System.out.println(" 1) Registrar socio \n 2) Registrar moto \n "
                     + "3) Registrar cesion \n 4) Mostrar lista de Socios \n 5) Mostrar lista de Motos\n "
                     + "6) Mostrar lista de Cesiones\n 7) Cerrar aplicacion y guardar dato en fichero\n"
-                    + " 8) Incrementar otros gastos de una moto\n 9) Eliminar socio de la asociacion");
+                    + " 8) Incrementar otros gastos de una moto\n 9) Eliminar socio de la asociacion\n"
+                    + " 10) Mostrar miembros con mas cesiones de motos recibidas\n");
             opcion = s.nextInt();
             
             //Switch para ver que opcion se ha elegido y realizar esa operacion
@@ -142,7 +143,11 @@ public class LauncherP1 {
                     acma.eliminarSocio(id_cliente_baja);
                     System.out.println("Se elimino el socio correctamente. ");
                     break;
-                //Opcion por defecto que muestra un mensaje de error
+                //Mostrar miembros con mas seciones
+                case 10:
+                    System.out.println("Ha elegido ver los MIEMBROS con MAS CESIONES.");
+                    acma.mostrarCesionesMax();
+                    break;
                 default:
                     System.out.println("No se ha elegido una opcion correcta");
                     break;

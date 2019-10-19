@@ -78,6 +78,7 @@ public class Gestor {
         socios.add(new Socio("Ana"));
         socios.add(new Socio("Bea"));
         
+        
         // Les ponemos todas las motos que ya estan registradas para que esten 
         // en posesion de un socio
         this.asignarMotosSocios();
@@ -146,32 +147,111 @@ public class Gestor {
     public void cesion(String matricula, int id1, int id2){
         Socio soc1, soc2;
         Moto moto;
+        int ces,id = 0;
         fecha_act = new Date();
 
         soc1 = this.comprobarIdSocio(id1);
         soc2 = this.comprobarIdSocio(id2);
 
-        moto = soc1.getMoto(matricula);
-
-        if(this.comprobarImporteMotosSocio(soc2, moto)){
-            soc1.eliminarMoto(moto);
-            soc2.anyadirMoto(moto);
+        //moto = soc1.getMoto(matricula);
+        
+//        for(Moto m: motos){
+//            if(m.getMatricula()==matricula){
+//                moto = m;
+//                id = m.getId_socio_asociado();
+//            }
+//        }
+        if(!this.comprobarMatriculaIgual(matricula)){
+             //realiza la cension si la matricula es de una moto registrada en la asociacion
+               
+                 moto = soc1.getMoto(matricula);
+                if(this.comprobarImporteMotosSocio(soc2, moto)){
+                    soc1.eliminarMoto(moto);
+                    soc2.anyadirMoto(moto);
+                }
+                cesiones.add(new Cesion(moto, soc1, soc2, fecha_act));
+                soc2.aumentarNum_cesiones();
+                System.out.println("Cesion añadida correctamente.");
+            }
+            else{
+                System.out.println("La matricula introducida no pertenece a ninguna moto dada de alta.");
         }
-        cesiones.add(new Cesion(moto, soc1, soc2, fecha_act));
-        System.out.println("Cesion añadida correctamente.");
+        
+        
+        
     }
     
+    /**
+     * Metodo para mostrar los socios con mas cesiones dadas y las motos relacionadas
+     */
+    public void mostrarCesionesMax(){
+        int num, max, num_aux,indice=1;
+        ArrayList<Socio> socios_max = new ArrayList();
+        Moto m;
+        String info;
+        
+        max=getMaxNum_cesiones();
+        
+        for(Socio soc: socios){     //bucle para sacar los socios que tienen el numero max.(y cercano) de cesiones
+            num=soc.getNum_cesiones();
+            if((num == max) || (num+1 == max)){ 
+                socios_max.add(soc);        //añadimos los socios con el numero maximo de cesiones que tenemos en el array
+            }
+        }
+        
+        System.out.println("Lista de socios que mas cesiones han recibido: \n");
+        for(Socio s: socios_max){   //imprimimos socios con sus motos relacionadas con las cesiones que le han dado
+            String nombre;
+            int id,nces;
+            nombre = s.getNombre();
+            id= s.getId();
+            nces=s.getNum_cesiones();
+            System.out.println("Id: "+id+", Nombre:"+nombre+", Numero cesiones: "+nces+"\n{");
+            
+            for(Cesion c: cesiones){
+                if(c.getSoc2()==s){
+                   m = c.getMoto();
+                   info = m.toString();
+                   System.out.println("Info de la moto de la cesion "+indice+": ");
+                   System.out.println(info);
+                   indice++;
+                }
+            }
+            System.out.println("}");
+
+        }
+        
+        
+    }
+    
+    /**
+     * Metodo para sacar el numero maximo de cesiones que tienen nuestros socios
+     */
+    public int getMaxNum_cesiones(){
+        int max=0,num, num_aux=0;
+         
+        for(Socio soc: socios){
+            num = soc.getNum_cesiones();
+            if(num > num_aux)
+                max = num;              //obtenemos el numero maximo de socios
+        }
+        
+        return max;
+    }
     
     /**
      * Metodo para mostrar la lista de socios registrados en la aplicacion
      */
     public void mostrarSocios(){
         String info,mensaje,info_moto;
+        int cont=1;
         System.out.println("Lista de socios:\n");
         
         for(Socio s: socios){
+            System.out.println("Info socio"+cont+": ");
             System.out.println(s.toString());
             System.out.println(s.informacionMotos());
+            cont++;
             
         }
     }
@@ -182,16 +262,18 @@ public class Gestor {
     public void mostrarMotos(){
         System.out.println("Lista de motos y socios asociados a cada una:\n"+motos);
         String info, info_socio;
-        int id;
+        int id,cont=1;
         Socio s;
         
         for(Moto m: motos){
+            System.out.println("Info moto: "+cont+": ");
             System.out.println(m.toString());
             id = m.getId_socio_asociado();
             s = comprobarIdSocio(id);
             if(s != null){
                 System.out.println("Info de su socio: "+s.toString());
             }
+            cont++;
         }
     }
     
@@ -199,10 +281,12 @@ public class Gestor {
      * Muestra las cesiones realizadas entre socios en la aplicacion con todos los datos
      */
     public void mostrarCesiones(){
-        
+        int cont=1;
         System.out.println("Historial de cesiones realizadas:\n");
         for(Cesion c : cesiones){
+            System.out.println("Cesion"+cont+": ");
             System.out.println(c.toString());
+            cont++;
         }
     }
     /**
@@ -243,9 +327,7 @@ public class Gestor {
                            System.out.println("Introduzca la ID del socio al que desea ceder la moto: ");
                            id_socioAceder = s6.nextInt();
                            cesion(m.getMatricula(),id_socio,id_socioAceder);
-                           
                        }
-
                        it.remove(); //eliminamos el socio
                    }
                }
