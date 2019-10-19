@@ -149,14 +149,6 @@ public class Gestor {
         }
         cesiones.add(new Cesion(moto, soc1, soc2, fecha_act));
     }
-
-    /**
-     * Metodo Get de IMPORTE_LIMITE_MOTOS_SOCIO
-     * @return constante de importe de motos limite de un socio
-     */
-    public int getIMPORTE_LIMITE_MOTOS_SOCIO() {
-        return importe_max_socio;
-    }
     
     
     /**
@@ -212,6 +204,21 @@ public class Gestor {
             motoact.incrementarOtrosGastos(otros_gastos);
         }else{
             System.out.println("ERROR: mstricula no encontrada");
+        }
+    }
+    
+    /**
+     * Metodo para eliminar un socio de la aplicacion
+     * y asignar todas sus motos previamente asociadas a otro/s socios
+     * @param id_socio id del socio a eliminar
+     */
+    public void eliminarSocio(int id_socio){
+        Socio socio = this.comprobarIdSocio(id_socio);
+        
+        if(socio != null){
+
+        }else{
+            System.out.println("ERROR: El socio con id= "+id_socio+" no existe en la aplicacion");
         }
     }
     

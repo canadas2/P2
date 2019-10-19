@@ -54,7 +54,7 @@ public class LauncherP1 {
             System.out.println("1) Registrar socio \n 2) Registrar moto \n "
                     + "3) Registrar cesion \n 4) Mostrar lista de Socios \n 5) Mostrar lista de Motos\n "
                     + "6) Mostrar lista de Cesiones\n 7) Cerrar aplicacion y guardar dato en fichero\n"
-                    + "8) Incrementar otros gastos de una moto\n");
+                    + "8) Incrementar otros gastos de una moto\n 9) Eliminar socio de la asociacion");
             opcion = s.nextInt();
             
             //Switch para ver que opcion se ha elegido y realizar esa operacion
@@ -133,6 +133,9 @@ public class LauncherP1 {
                     System.out.println("Introduzca importe de otros gastos a incrementar");
                     otros_gastos = s4.nextInt();
                     acma.incrementarOtrosGastosMoto(matricula, otros_gastos);
+                    break;
+                //Eliminar un socio de la asociacion
+                case 9:
                     break;
                 //Opcion por defecto que muestra un mensaje de error
                 default:
