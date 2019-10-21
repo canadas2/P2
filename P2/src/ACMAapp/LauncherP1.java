@@ -74,6 +74,8 @@ public class LauncherP1 {
                 case 2:
                     System.out.println("Ha elegido REGISTRAR una nueva MOTOCICLETA.");
                     Scanner s2 = new Scanner(System.in);
+                    System.out.println("Informacion de los socios:");
+                    acma.mostrarSocios();
                     System.out.println("Introduzca la MATRICULA:");
                     matricula = s2.nextLine();
                     System.out.println("Introduzca la MARCA:");
@@ -96,6 +98,8 @@ public class LauncherP1 {
                 case 3:
                     System.out.println("Ha elegido REGISTRAR una nueva CESION.");
                     Scanner s3 = new Scanner(System.in);
+                    System.out.println("Informacion de los socios:");
+                    acma.mostrarSocios();
                     System.out.println("Introduzca la MATRICULA de la MOTO a ceder:");
                     matricula = s3.nextLine();
                     System.out.println("Introduzca el nº ID del SOCIO 1 que desea cederla:");
@@ -138,6 +142,8 @@ public class LauncherP1 {
                 case 9:
                     System.out.println("Ha elegido ELEMINAR MIEMBRO.");
                     Scanner s5 = new Scanner(System.in);
+                    System.out.println("Informacion de los socios:");
+                    acma.mostrarSocios();
                     System.out.println("Introduzca la ID del socio que desea dar de baja: ");
                     id_cliente_baja = s5.nextInt();
                     acma.eliminarSocio(id_cliente_baja);
