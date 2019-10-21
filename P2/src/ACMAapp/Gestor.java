@@ -153,14 +153,7 @@ public class Gestor {
         soc1 = this.comprobarIdSocio(id1);
         soc2 = this.comprobarIdSocio(id2);
 
-        //moto = soc1.getMoto(matricula);
-        
-//        for(Moto m: motos){
-//            if(m.getMatricula()==matricula){
-//                moto = m;
-//                id = m.getId_socio_asociado();
-//            }
-//        }
+
         if(!this.comprobarMatriculaIgual(matricula)){
              //realiza la cension si la matricula es de una moto registrada en la asociacion
                
@@ -168,10 +161,14 @@ public class Gestor {
                 if(this.comprobarImporteMotosSocio(soc2, moto)){
                     soc1.eliminarMoto(moto);
                     soc2.anyadirMoto(moto);
+                    cesiones.add(new Cesion(moto, soc1, soc2, fecha_act));
+                    soc2.aumentarNum_cesiones();
+                    System.out.println("Cesion añadida correctamente.");
                 }
-                cesiones.add(new Cesion(moto, soc1, soc2, fecha_act));
-                soc2.aumentarNum_cesiones();
-                System.out.println("Cesion añadida correctamente.");
+                else{
+                    System.out.println("No es posible añadir la cesion. El importe total del socio a ceder supera el maximo posible.");
+                }
+                
             }
             else{
                 System.out.println("La matricula introducida no pertenece a ninguna moto dada de alta.");
@@ -194,7 +191,11 @@ public class Gestor {
         
         for(Socio soc: socios){     //bucle para sacar los socios que tienen el numero max.(y cercano) de cesiones
             num=soc.getNum_cesiones();
-            if((num == max) || (num+1 == max)){ 
+            if(num<4){
+                if(num == max)
+                    socios_max.add(soc);
+            }
+            else if((num == max) || (num+1 == max)){ 
                 socios_max.add(soc);        //añadimos los socios con el numero maximo de cesiones que tenemos en el array
             }
         }
